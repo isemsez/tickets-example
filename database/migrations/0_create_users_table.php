@@ -24,7 +24,7 @@ return new class extends Migration
 
             $table->string('full_name', 200)->nullable();
 
-            $table->boolean('is_admin')->default(false);
+            $table->string('rights', 6)->default('user');
 
             $table->timestamp('created_at')->nullable();
 

@@ -60,9 +60,9 @@ class Ticket extends Model
 
         'to_do',
 
-        'until',
+        'do_from',
 
-        'initiator',
+        'do_until',
 
         'doer',
 
@@ -70,44 +70,30 @@ class Ticket extends Model
 
     ];
 
-//    /**
-//     * The attributes that should be hidden for arrays.
-//     *
-//     * @var array
-//     */
-//    protected $hidden = [
-//
-//    ];
-//
-//    /**
-//     * The attributes that should be cast to native types.
-//     *
-//     * @var array
-//     */
-//    protected $casts = [
-//
-//    ];
-//
-//    const RuleList = [
-//
-//        'id' => [],
-//
-//        'to_do' => [],
-//
-//        'until' => [],
-//
-//        'initiator' => [],
-//
-//        'doer' => [],
-//
-//        'status' => [],
-//
-//    ];
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+
+        'id',
+
+        'created_at',
+
+        'updated_at',
+
+    ];
 
 
-    public function users()
+    public function ini_user()
     {
         return $this->belongsTo(User::class, 'initiator', 'id');
+    }
+
+    public function doer_user()
+    {
+        return $this->belongsTo(User::class, 'doer', 'id');
     }
 
 }

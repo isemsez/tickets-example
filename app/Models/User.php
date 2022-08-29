@@ -3,9 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
 
 /**
  * Class Users
@@ -15,7 +13,7 @@ use Illuminate\Notifications\Notifiable;
  * @property string $user_name
  * @property string $password
  * @property string $full_name
- * @property string $is_admin
+ * @property string $rights
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  */
@@ -64,36 +62,26 @@ class User extends Model
 
     ];
 
-//    /**
-//     * The attributes that should be hidden for arrays.
-//     *
-//     * @var array
-//     */
-//    protected $hidden = [
-//
-//        'password',
-//
-//    ];
-//
-//    /**
-//     * The attributes that should be cast to native types.
-//     *
-//     * @var array
-//     */
-//    protected $casts = [
-//
-//    ];
-//
-//    const RuleList = [
-//
-//        'authority' => [],
-//
-//    ];
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+
+        'password',
+
+    ];
 
 
-    public function tickets()
+    public function ticket_inis()
     {
-        return $this->hasMany(Ticket::class, 'initiator', 'id');
+        return $this->hasMany(Ticket::class, 'initiator');
+    }
+
+    public function ticket_doers()
+    {
+        return $this->hasMany(Ticket::class, 'doer');
     }
 
 }

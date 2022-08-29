@@ -17,9 +17,11 @@ return new class extends Migration
 
             $table->id();
 
-            $table->string('to_do', 500);
+            $table->string('note', 500);
 
-            $table->date('until')->nullable();
+            $table->date('do_from')->nullable();
+
+            $table->date('do_until')->nullable();
 
             $table->foreignId('initiator')->constrained('users');
 

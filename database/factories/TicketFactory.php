@@ -15,15 +15,21 @@ class TicketFactory extends Factory
     public function definition()
     {
         return [
-            'to_do' => $this->faker->text(),
+            'note' => $this->faker->text(60),
 
-            'until' => $this->faker->dateTimeBetween('now', '+1 week'),
+            'do_from' => $this->faker->dateTimeBetween('now', '+3 days'),
+
+            'do_until' => $this->faker->dateTimeBetween('+3 days', '+3 weeks'),
 
             'initiator' => rand(1,30),
-//            'initiator' => User::factory()->create()->id,
 
-            'doer' => rand(1,30),
-//            'doer' => User::factory()->create()->id,
+            'doer' => function(array $attributes) {
+                if ($this->faker->boolean(25)) {
+                    return $attributes['initiator'];
+                } else {
+                    return rand(1,30);
+                }
+            },
 
             'status' => $this->faker->randomElement(['open','progress','closed']),
 
