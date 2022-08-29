@@ -8,27 +8,27 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
 /**
- * Class Users
+ * Class Tickets
  * @package App\Models
  *
  * @property integer $id
- * @property string $user_name
- * @property string $password
- * @property string $full_name
- * @property string $is_admin
+ * @property string $to_do
+ * @property string $until
+ * @property integer $initiator
+ * @property integer $doer
+ * @property string $status
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  */
-class User extends Model
+class Ticket extends Model
 {
     use HasFactory;
-
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'users';
+    protected $table = 'tickets';
 
     /**
      * The primary key for the model.
@@ -58,9 +58,15 @@ class User extends Model
      */
     protected $fillable = [
 
-        'user_name',
+        'to_do',
 
-        'full_name',
+        'until',
+
+        'initiator',
+
+        'doer',
+
+        'status',
 
     ];
 
@@ -70,8 +76,6 @@ class User extends Model
 //     * @var array
 //     */
 //    protected $hidden = [
-//
-//        'password',
 //
 //    ];
 //
@@ -86,14 +90,24 @@ class User extends Model
 //
 //    const RuleList = [
 //
-//        'authority' => [],
+//        'id' => [],
+//
+//        'to_do' => [],
+//
+//        'until' => [],
+//
+//        'initiator' => [],
+//
+//        'doer' => [],
+//
+//        'status' => [],
 //
 //    ];
 
 
-    public function tickets()
+    public function users()
     {
-        return $this->hasMany(Ticket::class, 'initiator', 'id');
+        return $this->belongsTo(User::class, 'initiator', 'id');
     }
 
 }

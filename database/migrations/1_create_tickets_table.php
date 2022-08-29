@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTicketsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -25,7 +25,7 @@ class CreateTicketsTable extends Migration
 
             $table->foreignId('doer')->constrained('users')->nullable();
 
-            $table->string('status', 7)->default('open');
+            $table->string('status', 8)->default('open');
 
             $table->timestamp('created_at')->nullable();
 
@@ -44,4 +44,4 @@ class CreateTicketsTable extends Migration
     {
         Schema::dropIfExists('tickets');
     }
-}
+};
