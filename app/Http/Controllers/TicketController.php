@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreUpdateTicketRequest;
+use App\Http\Requests\StoreTicketRequest;
 use App\Models\Ticket;
+use App\Models\User;
+use Illuminate\Auth\Access\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -18,8 +20,14 @@ class TicketController extends Controller
     }
 
 
-    public function store(StoreUpdateTicketRequest $request): JsonResponse
+    public function store(StoreTicketRequest $request)
     {
+        $user_rights = User::find($request['initiator'])->pluck('rights');
+
+        if ($user_rights != 'admin') {
+            return Response::deny('xx');
+        }
+
         $ticket = new Ticket([
             'note' => $request['note'],
             'do_from' => $request['do_from'],
@@ -45,7 +53,7 @@ class TicketController extends Controller
     }
 
 
-    public function update(StoreUpdateTicketRequest $request, $id): JsonResponse
+    public function update(StoreUpdateTicketRequest $request): JsonResponse
     {
         $ticket = new Ticket([
             'note' => $request['note'],
@@ -58,7 +66,7 @@ class TicketController extends Controller
 
         try {
             $ticket->save();
-            return response()->json($ticket, 200);
+            return response()->json($ticket);
         } catch (Throwable $e) {
             return response()->json(['Error'=>$e->getMessage()],500);
         }
