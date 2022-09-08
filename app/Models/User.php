@@ -57,7 +57,7 @@ class User extends Model
     protected $fillable = [
 
         'user_name',
-
+        'password',
         'full_name',
 
     ];
@@ -69,7 +69,7 @@ class User extends Model
      */
     protected $hidden = [
 
-        'password',
+        'password', 'created_at', 'updated_at'
 
     ];
 
@@ -85,3 +85,4 @@ class User extends Model
     }
 
 }
+

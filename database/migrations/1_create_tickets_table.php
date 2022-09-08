@@ -19,8 +19,6 @@ return new class extends Migration
 
             $table->string('note', 500);
 
-            $table->date('do_from')->nullable();
-
             $table->date('do_until')->nullable();
 
             $table->foreignId('initiator')->constrained('users');
@@ -32,7 +30,6 @@ return new class extends Migration
             $table->timestamp('created_at')->nullable();
 
             $table->timestamp('updated_at')->nullable();
-
 
         });
     }

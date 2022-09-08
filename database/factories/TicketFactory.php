@@ -17,8 +17,6 @@ class TicketFactory extends Factory
         return [
             'note' => $this->faker->text(60),
 
-            'do_from' => $this->faker->dateTimeBetween('now', '+3 days'),
-
             'do_until' => $this->faker->dateTimeBetween('+3 days', '+3 weeks'),
 
             'initiator' => rand(1,30),

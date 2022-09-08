@@ -20,9 +20,9 @@ return new class extends Migration
 
             $table->string('user_name', 20);
 
-            $table->string('password', 20);
+            $table->string('password', 50);
 
-            $table->string('full_name', 200)->nullable();
+            $table->string('full_name', 200);
 
             $table->string('rights', 6)->default('user');
 

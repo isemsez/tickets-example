@@ -58,11 +58,11 @@ class Ticket extends Model
      */
     protected $fillable = [
 
-        'to_do',
-
-        'do_from',
+        'note',
 
         'do_until',
+
+        'initiator',
 
         'doer',
 
