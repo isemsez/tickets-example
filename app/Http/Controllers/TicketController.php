@@ -91,7 +91,7 @@ class TicketController extends Controller
 
             if ($ticket['status'] == 'progress' and $request['status'] == 'open')
                 return response()->json(['Error'=>'You have no rights to change status backward.'], 403);
-        } # validation finish
+        } # validation end
 
 
         $ticket['do_until'] = $request['do_until'] ?: $ticket['do_until'];
@@ -100,6 +100,7 @@ class TicketController extends Controller
         try {
             $ticket->save();
             return response()->json(['result'=>'successfully edited', 'data'=>$ticket ]);
+
         } catch (Throwable $e) {
             return response()->json(['Error'=>$e->getMessage()],500);
         }
@@ -116,5 +117,4 @@ class TicketController extends Controller
             return response()->json(['Error'=>$e->getMessage()],500);
         }
     }
-
 }
